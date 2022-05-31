@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+            />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+        <title>Edit</title>
+    </head>
+    <body>
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+                <div class="container">
+                    <a class="navbar-brand fw-bold" href="/">KTP Management System</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Feature</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="container mt-5">
+            <h1 class="mb-3">Ubah Data</h1>
+            <div class="row col-lg-8 mb-5">
+                <form action="#" th:action="@{/edit}" th:object="${warga}" method="post" class="mt-3" enctype="multipart/form-data">
+                    <input type="number" class="form-control" id="id" name="id" th:field="*{id}" hidden/>
+
+                    <div class="form-group mb-3">
+                        <label for="nama" class="form-lable">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" th:field="*{nama}"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ttl" class="form-lable">Tanggal Lahir</label>
+                        <input type="date" th:value="${#calendars.format(warga.ttl, 'yyyy-MM-dd')}" class="form-control" id="ttl" name="ttl" placeholder="dd-mm-yyyy"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="foto" class="form-lable mb-1">Input Foto</label>
+                        <div class="d-flex mb-2">
+                            <img th:src="@{${'/img?id='+ warga.id}}" alt="..." style="max-width: 200px; overflow:hidden;" />
+                        </div>
+                        <input type="file" class="form-control" id="foto" name="foto" />
+                    </div>
+
+                    <div class="form-group">
+                        <a type="button" class="btn btn-warning" href="/">Kembali</a>
+                        <button type="submit" class="btn btn-success">Ubah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
